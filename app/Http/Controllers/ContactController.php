@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller {
     public function index() {
-        return view('contactList');
+        return view('contact.list   ');
     }
 
     public function listAjax() {
@@ -69,5 +69,24 @@ class ContactController extends Controller {
         $response['count'] = $count;
 
         return new JsonResponse($response);
+    }
+
+
+    public function create() {
+        return view('contact.create');
+    }
+
+    public function save() {
+        $newContact = $this->validate(request(), [
+            'name'        => 'required',
+            'email' => 'required|email',
+            'phone'  => ['nullable', 'regex:/^36(20|30|31|70)[0-9]{7}/'],
+            'categories' => 'required|array'
+        ]);
+
+        $contact = Contact::create(collect($newContact)->except('categories')->toArray());
+        $contact->categories()->sync($newContact['categories']);
+
+        return redirect(route('contact'));
     }
 }

@@ -7,6 +7,8 @@ A projekt egy beugró próbafeladat a Dream Interactive részére.
 **2018-04-27**
 - Laravel, Bootstrap berőffentése (~2 óra)
 - Különböző már létező elemek összevadászása, implementálása (~1 óra)
+- Telefonkönyv listázó valamint design finomítgatás (~3 óra)
+- Új kontakt (~1 óra)
 
 ## Harmadik féltől származó és saját komponensek
 

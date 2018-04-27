@@ -26,6 +26,9 @@ use Illuminate\Database\Query\Builder;
  * @mixin \Eloquent
  */
 class Contact extends Model {
+
+    protected $fillable = ['name', 'email', 'phone'];
+
     public function categories() {
         return $this->belongsToMany(Category::class);
     }

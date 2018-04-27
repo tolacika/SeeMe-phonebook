@@ -18,7 +18,9 @@
 
 @include('sections.nav')
 
-@include('sections.jumbotron')
+@if (in_array(\request()->route()->getName(), ['home', 'contact']))
+    @include('sections.jumbotron')
+@endif
 
 <div class="container">
     @yield('content')
@@ -28,5 +30,8 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset("js/app.js") }}"></script>
+
+@stack('after-scripts')
+
 </body>
 </html>
