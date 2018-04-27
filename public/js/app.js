@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(2);
+module.exports = __webpack_require__(5);
 
 
 /***/ }),
@@ -77,11 +77,11 @@ module.exports = __webpack_require__(2);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_jquery_isvisible__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_jquery_isvisible__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_jquery_isvisible___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__utils_jquery_isvisible__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__application__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__application__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__application___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__application__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin_list__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin_list__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin_list___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__admin_list__);
 
 
@@ -89,16 +89,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
 /***/ (function(module, exports) {
 
 /**
@@ -178,7 +168,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 }(jQuery);
 
 /***/ }),
-/* 8 */
+/* 3 */
 /***/ (function(module, exports) {
 
 Application = function Application() {};
@@ -308,7 +298,7 @@ $(document).ready(function () {
 });
 
 /***/ }),
-/* 9 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -479,13 +469,16 @@ AdminList.prototype.tooltip = function ($elem, tooltip) {
     $elem.attr('data-toggle', 'tooltip').attr('data-placement', 'top').attr('data-original-title', tooltip);
 };
 
-AdminList.prototype.column = function (html, tooltip) {
+AdminList.prototype.column = function (html, tooltip, extraClass) {
     var $column = $('<td>'),
         hidden = this.$currentHead.hasClass('hidden');
     this.$row.append($column.addClass('valignm ' + (hidden ? 'hidden' : '')).html(html));
     if (typeof tooltip === 'string' && tooltip.length) {
         this.tooltip($column, tooltip);
         //$column.attr('data-toggle', 'tooltip').attr('data-placement', 'top').attr('data-original-title', tooltip);
+    }
+    if (typeof extraClass === 'string' && extraClass.length) {
+        $column.addClass(extraClass);
     }
     return $column;
 };
@@ -535,7 +528,21 @@ AdminList.prototype.columnPhone = function (phone) {
 };
 
 AdminList.prototype.columnButtons = function (id, url_prefix) {
-    return this.column("asd");
+    url_prefix = this.urlPrefixer(url_prefix);
+    var holder = $('<div>');
+    holder.append($('<a>').addClass('btn btn-success btn-sm').attr('href', url_prefix + "edit/" + id).append($('<i>').addClass('fa fa-edit')));
+    holder.append(" ");
+    holder.append($('<a>').addClass('btn btn-outline-danger btn-sm deleteButton').attr('href', url_prefix + "delete/" + id).append($('<i>').addClass('fa fa-trash')));
+    return this.column(holder, null, "text-right");
+};
+
+AdminList.prototype.columnCategories = function (categories) {
+    var holder = $('<div>');
+    for (var i = 0; i < categories.length; i++) {
+        holder.append(this.getLabel(categories[i], 'secondary'));
+        holder.append(" ");
+    }
+    return this.column(holder);
 };
 
 AdminList.prototype.getLabel = function (content, cl) {
@@ -561,6 +568,12 @@ $(document).ready(function () {
         window.adminList = new AdminList($('form#search'), $('tbody#list'), $('thead#head'));
     }
 });
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

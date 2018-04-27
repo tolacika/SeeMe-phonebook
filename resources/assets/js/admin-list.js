@@ -168,12 +168,15 @@ AdminList.prototype.tooltip = function ($elem, tooltip) {
     $elem.attr('data-toggle', 'tooltip').attr('data-placement', 'top').attr('data-original-title', tooltip);
 };
 
-AdminList.prototype.column = function (html, tooltip) {
+AdminList.prototype.column = function (html, tooltip, extraClass) {
     var $column = $('<td>'), hidden = this.$currentHead.hasClass('hidden');
     this.$row.append($column.addClass('valignm ' + (hidden ? 'hidden' : '')).html(html));
     if (typeof tooltip === 'string' && tooltip.length) {
         this.tooltip($column, tooltip);
         //$column.attr('data-toggle', 'tooltip').attr('data-placement', 'top').attr('data-original-title', tooltip);
+    }
+    if (typeof extraClass === 'string' && extraClass.length) {
+        $column.addClass(extraClass);
     }
     return $column;
 };
@@ -205,7 +208,7 @@ AdminList.prototype.columnLink = function (html, link, callback, disabled, blank
     return $column;
 };
 
-AdminList.prototype.urlPrefixer = function(url) {
+AdminList.prototype.urlPrefixer = function (url) {
     return (url || "").replace(/\/$/, "") + "/" || "";
 };
 
@@ -223,7 +226,21 @@ AdminList.prototype.columnPhone = function (phone) {
 };
 
 AdminList.prototype.columnButtons = function (id, url_prefix) {
-    return this.column("asd");
+    url_prefix = this.urlPrefixer(url_prefix);
+    var holder = $('<div>');
+    holder.append($('<a>').addClass('btn btn-success btn-sm').attr('href', url_prefix + "edit/" + id).append($('<i>').addClass('fa fa-edit')));
+    holder.append(" ");
+    holder.append($('<a>').addClass('btn btn-outline-danger btn-sm deleteButton').attr('href', url_prefix + "delete/" + id).append($('<i>').addClass('fa fa-trash')));
+    return this.column(holder, null, "text-right");
+};
+
+AdminList.prototype.columnCategories = function (categories) {
+    var holder = $('<div>');
+    for (var i = 0; i < categories.length; i++) {
+        holder.append(this.getLabel(categories[i], 'secondary'));
+        holder.append(" ");
+    }
+    return this.column(holder);
 };
 
 AdminList.prototype.getLabel = function (content, cl) {

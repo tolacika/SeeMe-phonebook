@@ -34,3 +34,13 @@
   opacity: 0.9;
   filter: alpha(opacity=90);
 }
+
+table.valign-middle {
+  td, th {
+    vertical-align: middle;
+  }
+}
+
+body {
+  margin-top: 56px;
+}

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 /**
  * App\Models\Contact
@@ -25,8 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class Contact extends Model {
-
-
     public function categories() {
         return $this->belongsToMany(Category::class);
     }

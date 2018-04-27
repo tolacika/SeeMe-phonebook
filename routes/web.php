@@ -13,4 +13,6 @@
 
 
 Route::get('/', 'ContactController@index')->name('home');
+Route::get('/contact', 'ContactController@index')->name('contact');
+Route::get('/contact/create', 'ContactController@create')->name('contact.create');
 Route::post('contact/list/ajax', 'ContactController@listAjax')->name('contact.list.ajax');
