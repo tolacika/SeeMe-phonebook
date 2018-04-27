@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name("home");
+
+Route::get('/', 'ContactController@index')->name('home');
+Route::post('contact/list/ajax', 'ContactController@listAjax')->name('contact.list.ajax');

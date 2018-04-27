@@ -16,15 +16,9 @@
 </head>
 <body>
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">SeeMe Telefonkönyv</h1>
-        <p class="lead">Egyszeri próbafeladat a Dream Interactive részére</p>
-        <hr class="my-4">
-        <p>További információ a Bitbucketen található</p>
-        <a class="btn btn-primary btn-lg" href="https://bitbucket.org/CmdNetWizard/seeme-phonebook/overview" target="_blank"><i class="fab fa-bitbucket"></i> BitBucket</a>
-    </div>
-</div>
+@include('sections.nav')
+
+@include('sections.jumbotron')
 
 <div class="container">
     @yield('content')
@@ -34,6 +28,5 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset("js/app.js") }}"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 </body>
 </html>
