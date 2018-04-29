@@ -31,7 +31,7 @@ class CategoryController extends Controller {
 
         $categories = $categories->orderBy(request('order_field', 'id'), request('order_by', 'asc'));
         $count = $categories->count();
-        $pager = new Paginator(10, $page, $count);
+        $pager = new Paginator(config('seeme.result_per_page'), $page, $count);
 
         $categories = $categories->offset($pager->getOffset())->limit($pager->getPerPage())->get();
 

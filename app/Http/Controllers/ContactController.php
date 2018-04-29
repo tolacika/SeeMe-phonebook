@@ -44,7 +44,7 @@ class ContactController extends Controller {
 
         $contacts = $contacts->orderBy(request('order_field', 'id'), request('order_by', 'asc'));
         $count = $contacts->count();
-        $pager = new Paginator(10, $page, $count);
+        $pager = new Paginator(config('seeme.result_per_page'), $page, $count);
 
         $contacts = $contacts->offset($pager->getOffset())->limit($pager->getPerPage())->get();
 
