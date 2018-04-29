@@ -53,8 +53,8 @@
                                 <th class="sorting_asc text-center" data-sort="name" data-elem="Name(elem.id, elem.name, '{{ route('contact') }}')">Név</th>
                                 <th class="text-center" data-sort="email" data-elem="Email(elem.email)">E-mail cím</th>
                                 <th class="text-center" data-sort="phone" data-elem="Phone(elem.phone)">Telefonszám</th>
-                                <th class="text-center" data-sort="phone" data-elem="Categories(elem.categories)">Kategóriák</th>
-                                <th class="text-center" data-sort="phone" data-elem="Created(elem.created_at)">Létrehozva</th>
+                                <th class="text-center" data-elem="Categories(elem.categories)">Kategóriák</th>
+                                <th class="text-center" data-sort="created_at" data-elem="Created(elem.created_at)">Létrehozva</th>
                                 <th class="text-right" data-elem="Buttons(elem.id, elem.name, '{{ route('contact') }}')">
                                     <a href="{{ route('contact.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i></a>
                                 </th>

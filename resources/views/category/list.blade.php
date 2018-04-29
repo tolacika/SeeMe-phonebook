@@ -34,8 +34,8 @@
                             <thead id="head">
                             <tr>
                                 <th class="sorting_asc text-center" data-sort="name" data-elem="Name(elem.id, elem.name, '{{ route('category') }}')">Név</th>
-                                <th class="text-center" data-sort="phone" data-elem="Count(elem.count, ':count db névjegy')">Névjegyek</th>
-                                <th class="text-center" data-sort="phone" data-elem="Created(elem.created_at)">Létrehozva</th>
+                                <th class="text-center" data-elem="Count(elem.count, ':count db névjegy')">Névjegyek</th>
+                                <th class="text-center" data-sort="created_at" data-elem="Created(elem.created_at)">Létrehozva</th>
                                 <th class="text-right" data-elem="Buttons(elem.id, elem.name, '{{ route('category') }}', elem.hidden)">
                                     <a href="{{ route('category.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i></a>
                                 </th>
