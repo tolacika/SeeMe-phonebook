@@ -8,6 +8,8 @@ Mivel adataink már vannak, jöhetnek a felületek, ahol ezeket látjuk. A felad
 
 A kategóriák esetében ugyanaz az eljárás, mint a névjegyek esetében, azzal a különbséggel, hogy listázáskor a névjegyek számát is megjelenítem, létrehozáskor és szerkesztéskor csak nevet lehet megadni, valamint törlés esetén a összes névjegyről le lesz választva a törölt kategória, a "szabadon maradt" névjegyeket pedig behelyezzük az alapértelmezett kategóriába.
 
+## [Live Demo](http://seeme.packingstation.hu/)
+
 ## Szerver szükségletek:
 
 - PHP >= 7.1.3
@@ -39,6 +41,8 @@ php artisan migrate --seed
 ```
 
 És már használható is az alkalmazás. :)
+
+Amennyiben a lépések elvégzése után azzal a hibaüzenettel találkozunk, hogy: `No application encryption key has been specified.`, akkor még szükség van egy `php artisan key_generate` parancsra.
 
 ## Haladási napló
 
