@@ -86,7 +86,7 @@ class ContactController extends Controller {
         $contact = Contact::create(collect($newContact)->except('categories')->toArray());
         $contact->categories()->sync($newContact['categories']);
 
-        return redirect(route('contact'));
+        return redirect(route('contact'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A névjegy sikeresen létre lett hozva."]);
     }
 
     public function edit(Contact $contact) {
@@ -105,7 +105,7 @@ class ContactController extends Controller {
         $contact->categories()->sync($newContact['categories']);
         $contact->save();
 
-        return redirect(route('contact'));
+        return redirect(route('contact'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A névjegy sikeresen frissítve lett."]);
     }
 
     /**
@@ -119,6 +119,6 @@ class ContactController extends Controller {
         $contact->categories()->detach();
         $contact->delete();
 
-        return redirect(route('contact'));
+        return redirect(route('contact'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A névjegy sikeresen törölve lett."]);
     }
 }

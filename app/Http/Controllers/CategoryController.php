@@ -64,7 +64,7 @@ class CategoryController extends Controller {
 
         Category::create($newCategory);
 
-        return redirect(route('category'));
+        return redirect(route('category'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A kategória sikeresen létre lett hozva."]);
     }
 
     public function edit(Category $category) {
@@ -86,7 +86,7 @@ class CategoryController extends Controller {
         $category->name = $newCategory['name'];
         $category->save();
 
-        return redirect(route('category'));
+        return redirect(route('category'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A kategória sikeresen frissítve lett."]);
     }
 
     /**
@@ -109,6 +109,6 @@ class CategoryController extends Controller {
         }
         $category->delete();
 
-        return redirect(route('category'));
+        return redirect(route('category'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A kategória sikeresen törölve lett."]);
     }
 }

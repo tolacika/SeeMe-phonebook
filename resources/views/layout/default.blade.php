@@ -37,5 +37,11 @@
 
 @stack('after-scripts')
 
+@if (session('flash'))
+    <script type="text/javascript">
+        window.app.flashMessage('{{ session('flash')['level'] }}', '{{ session('flash')['message'] }}', '{{ session('flash')['title'] ?? '' }}')
+    </script>
+@endif
+
 </body>
 </html>
