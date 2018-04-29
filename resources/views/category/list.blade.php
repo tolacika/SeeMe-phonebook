@@ -26,7 +26,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    Névjegyek
+                    Kategóriák
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
