@@ -61,6 +61,7 @@ class ContactController extends Controller {
                 'email'      => $c->email,
                 'phone'      => $c->phone ? "+" . $c->phone : "",
                 'categories' => $categories,
+                'created_at' => $c->created_at->format('Y-m-d H:i:s')
             ];
             $response['list'][] = $item;
         }

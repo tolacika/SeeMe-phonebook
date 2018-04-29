@@ -133,5 +133,6 @@ Function.prototype.extends = function (parentClassOrObject) {
 window.app = new Application();
 
 $(document).ready(function () {
+    moment.locale('hu');
     window.app.initApp();
 });

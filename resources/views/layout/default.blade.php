@@ -31,6 +31,8 @@
 <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset("js/moment.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("js/moment.hu.js") }}"></script>
 <script type="text/javascript" src="{{ asset("js/app.js") }}"></script>
 
 @stack('after-scripts')

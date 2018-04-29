@@ -154,7 +154,7 @@ AdminList.prototype.searchAction = function () {
             if (response.end === false) {
                 _this.run = false;
             } else {
-                _this.$list.parent().after($('<p>').addClass('no-more-result').html('Nincs több találat'));
+                _this.$list.parent().after($('<p>').addClass('no-more-result text-center').html('Nincs több találat'));
             }
 
             window.app.initDeletes();
@@ -167,7 +167,7 @@ AdminList.prototype.searchAction = function () {
 };
 
 AdminList.prototype.tooltip = function ($elem, tooltip) {
-    $elem.attr('data-toggle', 'tooltip').attr('data-placement', 'top').attr('data-original-title', tooltip);
+    $elem.attr('data-toggle', 'tooltip').attr('data-placement', 'top').attr('data-original-title', tooltip).tooltip();
 };
 
 AdminList.prototype.column = function (html, tooltip, extraClass) {
@@ -220,11 +220,11 @@ AdminList.prototype.columnName = function (id, name, url_prefix) {
 };
 
 AdminList.prototype.columnEmail = function (email) {
-    return this.columnLink(email, "mailto:" + email, false, false, true);
+    return this.columnLink(email, "mailto:" + email, false, false, true).addClass('text-center');
 };
 
 AdminList.prototype.columnPhone = function (phone) {
-    return this.columnLink(phone, "tel:" + phone);
+    return this.columnLink(phone, "tel:" + phone).addClass('text-center');
 };
 
 AdminList.prototype.columnButtons = function (id, name, url_prefix) {
@@ -233,7 +233,7 @@ AdminList.prototype.columnButtons = function (id, name, url_prefix) {
     holder.append($('<a>').addClass('btn btn-success btn-sm').attr('href', url_prefix + "edit/" + id).append($('<i>').addClass('fa fa-edit')));
     holder.append(" ");
     holder.append($('<button>').addClass('btn btn-outline-danger btn-sm deleteButton').attr('type', 'button').attr('data-url', url_prefix + "destroy/" + id).attr('data-text', 'Biztosan törlöd ' + name + " névjegyét?").append($('<i>').addClass('fa fa-trash')));
-    return this.column(holder, null, "text-right");
+    return this.column(holder).addClass("text-right");
 };
 
 AdminList.prototype.columnCategories = function (categories) {
@@ -242,7 +242,13 @@ AdminList.prototype.columnCategories = function (categories) {
         holder.append(this.getLabel(categories[i], 'secondary'));
         holder.append(" ");
     }
-    return this.column(holder);
+    return this.column(holder).addClass('text-center');
+};
+
+AdminList.prototype.columnCreated = function (createdAt) {
+    var date = $('<span>').text(moment(createdAt).fromNow());
+    this.tooltip(date, createdAt);
+    return this.column(date).addClass('text-center');
 };
 
 AdminList.prototype.getLabel = function (content, cl) {
