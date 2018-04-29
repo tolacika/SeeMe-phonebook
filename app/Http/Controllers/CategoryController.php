@@ -7,11 +7,26 @@ use App\Models\Category;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class CategoryController
+ * @package App\Http\Controllers
+ */
 class CategoryController extends Controller {
+
+    /**
+     * Megjeleníti a kategória listázót
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
         return view('category.list');
     }
 
+    /**
+     * A kategória listázó ezzel tölti fel magát
+     *
+     * @return JsonResponse
+     */
     public function listAjax() {
         $response = [
             'status' => "success",
@@ -52,11 +67,20 @@ class CategoryController extends Controller {
 
         return new JsonResponse($response);
     }
-
+    /**
+     * Megjeleníti a létrehozó form-ot
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create() {
         return view('category.create');
     }
 
+    /**
+     * Elmenti az új elemet
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store() {
         $newCategory = $this->validate(request(), [
             'name' => 'required',
@@ -67,6 +91,13 @@ class CategoryController extends Controller {
         return redirect(route('category'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A kategória sikeresen létre lett hozva."]);
     }
 
+    /**
+     * Megjeleníti a szerkesztő form-ot
+     *
+     * @param Category $category
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Category $category) {
         if ($category->hidden == 1) {
             abort(404);
@@ -75,6 +106,13 @@ class CategoryController extends Controller {
         return view('category.edit', ['category' => $category]);
     }
 
+    /**
+     * Elmenti a szerkesztett elemet
+     *
+     * @param Category $category
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Category $category) {
         if ($category->hidden == 1) {
             abort(404);
@@ -90,6 +128,9 @@ class CategoryController extends Controller {
     }
 
     /**
+     * Törli az adott kategóriát, leválasztja magáról az összes névjegyet,
+     * Ha egy névjegy kategória nélkül marad, azt berakja az alap kategóriába (id=1)
+     *
      * @param Category $category
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector

@@ -22,8 +22,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model {
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['name'];
 
+    /**
+     * Many-to-many reláció
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function contacts() {
         return $this->belongsToMany(Contact::class);
     }

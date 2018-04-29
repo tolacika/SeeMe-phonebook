@@ -2,6 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class CategorySeeder
+ *
+ * Feltölti a kategória táblát a megfelelő alapértékekkel
+ */
 class CategorySeeder extends Seeder
 {
     /**

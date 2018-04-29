@@ -2,6 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class ContactSeeder
+ *
+ * Feltölti a névjegyek táblát véletlenszerű kezdeti adatokkal
+ */
 class ContactSeeder extends Seeder
 {
     /**

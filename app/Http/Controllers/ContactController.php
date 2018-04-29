@@ -6,11 +6,26 @@ use App\Helpers\Paginator;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class ContactController
+ * @package App\Http\Controllers
+ */
 class ContactController extends Controller {
+
+    /**
+     * Megjeleníti a névjegy listázót
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
         return view('contact.list');
     }
 
+    /**
+     * A névjegy listázó ezzel tölti fel magát
+     *
+     * @return JsonResponse
+     */
     public function listAjax() {
         $response = [
             'status' => "success",
@@ -60,7 +75,7 @@ class ContactController extends Controller {
                 'email'      => $c->email,
                 'phone'      => $c->phone ? "+" . $c->phone : "",
                 'categories' => $categories,
-                'created_at' => $c->created_at->format('Y-m-d H:i:s')
+                'created_at' => $c->created_at->format('Y-m-d H:i:s'),
             ];
             $response['list'][] = $item;
         }
@@ -71,10 +86,20 @@ class ContactController extends Controller {
         return new JsonResponse($response);
     }
 
+    /**
+     * Megjeleníti a létrehozó form-ot
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create() {
         return view('contact.create');
     }
 
+    /**
+     * Elmenti az új elemet
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store() {
         $newContact = $this->validate(request(), [
             'name'       => 'required',
@@ -89,10 +114,24 @@ class ContactController extends Controller {
         return redirect(route('contact'))->with('flash', ['level' => "success", 'title' => "Sikeres művelet!", 'message' => "A névjegy sikeresen létre lett hozva."]);
     }
 
+    /**
+     * Megjeleníti a szerkesztő form-ot
+     *
+     * @param Contact $contact
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Contact $contact) {
         return view('contact.edit', ['contact' => $contact, 'categoryArray' => $contact->getCategoriesArray()]);
     }
 
+    /**
+     * Elmenti a szerkesztett elemet
+     *
+     * @param Contact $contact
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Contact $contact) {
         $newContact = $this->validate(request(), [
             'name'       => 'required',
@@ -109,6 +148,8 @@ class ContactController extends Controller {
     }
 
     /**
+     * Törli az adott elemet, valamint lekapcsolja magáról a kategóriákat
+     *
      * @param Contact $contact
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector

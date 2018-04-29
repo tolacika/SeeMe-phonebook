@@ -57,6 +57,7 @@ Amennyiben a lépések elvégzése után azzal a hibaüzenettel találkozunk, ho
 
 - Kontakt szerkesztése, törlése (~1 óra)
 - Kategóriák listázása, létrehozása, szerkesztése, törlése (~2 óra)
+- Befejező lépések, doksi, readme írás, stb. (~2 óra)
 
 ## Harmadik féltől származó és saját komponensek
 

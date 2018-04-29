@@ -33,14 +33,32 @@ use Illuminate\Database\Query\Builder;
  */
 class Contact extends Model {
 
+    /**
+     * Soft deletes - Nem törli az adatbázisból, csak töröltre állítja
+     */
     use SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['name', 'email', 'phone'];
 
+    /**
+     * Many-to-many reláció
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories() {
         return $this->belongsToMany(Category::class);
     }
 
+    /**
+     * Visszaadja tömbként a hozzzá tartozó kategóriák id-ját
+     *
+     * @return array
+     */
     public function getCategoriesArray() {
         $categories = $this->categories;
         $arry = [];
