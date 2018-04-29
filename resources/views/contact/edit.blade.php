@@ -6,7 +6,7 @@
         <div class="col-sm-8 mx-auto">
             <div class="card">
                 <h5 class="card-header">
-                    Új névjegy felvétele
+                    Névjegy szerkesztése
                 </h5>
                 <div class="card-body">
                     @if (count($errors))
@@ -16,7 +16,7 @@
                             @endforeach
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('contact.update', ['contact' =>$contact]) }}" id="createContactForm">
+                    <form method="POST" action="{{ route('contact.update', ['contact' => $contact]) }}" id="editContactForm">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="nameField">Név</label>
@@ -56,7 +56,7 @@
 @push('after-scripts')
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#createContactForm").submit(function (e) {
+            $("#editContactForm").submit(function (e) {
                 if ($(".categorySelect:checked").length === 0) {
                     alert("Legalább egy kategória kiválasztandó");
                     e.preventDefault();

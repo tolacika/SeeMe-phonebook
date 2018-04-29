@@ -544,11 +544,14 @@ AdminList.prototype.columnPhone = function (phone) {
     return this.columnLink(phone, "tel:" + phone).addClass('text-center');
 };
 
-AdminList.prototype.columnButtons = function (id, name, url_prefix) {
+AdminList.prototype.columnButtons = function (id, name, url_prefix, hidden) {
+    hidden = hidden || false;
+    if (hidden) {
+        return this.column("&nbsp;");
+    }
     url_prefix = this.urlPrefixer(url_prefix);
-    var holder = $('<div>');
-    holder.append($('<a>').addClass('btn btn-success btn-sm').attr('href', url_prefix + "edit/" + id).append($('<i>').addClass('fa fa-edit')));
-    holder.append(" ");
+    var holder = $('<div>').addClass('btn-group').attr('role', 'group').attr('aria-label', "Műveletek");
+    holder.append($('<a>').addClass('btn btn-outline-success btn-sm').attr('href', url_prefix + "edit/" + id).append($('<i>').addClass('fa fa-edit')));
     holder.append($('<button>').addClass('btn btn-outline-danger btn-sm deleteButton').attr('type', 'button').attr('data-url', url_prefix + "destroy/" + id).attr('data-text', 'Biztosan törlöd ' + name + " névjegyét?").append($('<i>').addClass('fa fa-trash')));
     return this.column(holder).addClass("text-right");
 };
@@ -566,6 +569,11 @@ AdminList.prototype.columnCreated = function (createdAt) {
     var date = $('<span>').text(moment(createdAt).fromNow());
     this.tooltip(date, createdAt);
     return this.column(date).addClass('text-center');
+};
+
+AdminList.prototype.columnCount = function (count, tpl) {
+    tpl = tpl.replace(':count', count);
+    return this.column(tpl).addClass('text-center');
 };
 
 AdminList.prototype.getLabel = function (content, cl) {

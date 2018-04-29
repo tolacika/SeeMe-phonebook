@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Helpers\Paginator;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller {
     public function index() {
@@ -116,6 +115,8 @@ class ContactController extends Controller {
      * @throws \Exception
      */
     public function destroy(Contact $contact) {
+
+        $contact->categories()->detach();
         $contact->delete();
 
         return redirect(route('contact'));

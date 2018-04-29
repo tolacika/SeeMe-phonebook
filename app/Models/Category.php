@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class Category extends Model {
+
+    protected $fillable = ['name'];
+
     public function contacts() {
         return $this->belongsToMany(Contact::class);
     }

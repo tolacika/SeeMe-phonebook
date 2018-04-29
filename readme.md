@@ -14,6 +14,7 @@ A projekt egy beugró próbafeladat a Dream Interactive részére.
 **2018-04-29**
 
 - Kontakt szerkesztése, törlése (~1 óra)
+- Kategóriák listázása, létrehozása, szerkesztése, törlése (~2 óra)
 
 ## Harmadik féltől származó és saját komponensek
 

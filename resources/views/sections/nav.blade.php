@@ -12,8 +12,8 @@
                 <li class="nav-item {{ starts_with(\request()->route()->getName(), ['home', 'contact']) ? "active" : "" }}">
                     <a class="nav-link" href="{{ route('contact') }}"><i class="far fa-address-book"></i> <span class="d-sm-none d-md-inline">Telefonkönyv</span></a>
                 </li>
-                <li class="nav-item {{ starts_with(\request()->route()->getName(), ['categories', 'category']) ? "active" : "" }}">
-                    <a class="nav-link" href="#"><i class="fa fa-database"></i> <span class="d-sm-none d-md-inline">Kategóriák</span></a>
+                <li class="nav-item {{ starts_with(\request()->route()->getName(), 'category') ? "active" : "" }}">
+                    <a class="nav-link" href="{{ route('category') }}"><i class="fa fa-database"></i> <span class="d-sm-none d-md-inline">Kategóriák</span></a>
                 </li>
             </ul>
         </div>

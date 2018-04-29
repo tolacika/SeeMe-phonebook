@@ -11,15 +11,15 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Contact::class, 40)->create()->each(function($u) {
+        factory(App\Models\Contact::class, 100)->create()->each(function($u) {
             /** @var $u \App\Models\Contact */
-            $u->categories()->attach(rand(1, 4));
-            if (rand(0, 1) == 1) {
+            $firstCategory = rand(1, 4);
+            $u->categories()->attach($firstCategory);
+            if (rand(0, 1) == 1 && $firstCategory > 1) {
                 try {
-                    $u->categories()->attach(rand(1, 4));
+                    $u->categories()->attach(rand(2, 4));
                 } catch (\Illuminate\Database\QueryException $ex) {}
             }
-//            var_dump($u->categories);die;
         });
     }
 }
