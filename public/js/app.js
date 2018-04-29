@@ -174,7 +174,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Application = function Application() {};
 
 Application.prototype.initApp = function () {
+    this.initDeletes();
     $(":input").attr('autocomplete', "off");
+};
+
+Application.prototype.initDeletes = function () {
+    $(".deleteButton").off('click.deleteButton').on('click.deleteButton', function (e) {
+        e.preventDefault();
+        var url = $(this).data('url'),
+            text = $(this).data('text');
+        $("#deleteModalForm").attr("action", url);
+        if (text) {
+            $("#deleteModalText").html(text);
+        }
+        $("#deleteModal").modal();
+    });
 };
 
 Application.prototype.post = function (settings, method) {
@@ -458,6 +472,8 @@ AdminList.prototype.searchAction = function () {
                 _this.$list.parent().after($('<p>').addClass('no-more-result').html('Nincs több találat'));
             }
 
+            window.app.initDeletes();
+
             if (_this.$list.find('tr').first().isvisible() && _this.$list.find('tr').last().isvisible()) {
                 _this.searchAction();
             }
@@ -527,12 +543,12 @@ AdminList.prototype.columnPhone = function (phone) {
     return this.columnLink(phone, "tel:" + phone);
 };
 
-AdminList.prototype.columnButtons = function (id, url_prefix) {
+AdminList.prototype.columnButtons = function (id, name, url_prefix) {
     url_prefix = this.urlPrefixer(url_prefix);
     var holder = $('<div>');
     holder.append($('<a>').addClass('btn btn-success btn-sm').attr('href', url_prefix + "edit/" + id).append($('<i>').addClass('fa fa-edit')));
     holder.append(" ");
-    holder.append($('<a>').addClass('btn btn-outline-danger btn-sm deleteButton').attr('href', url_prefix + "delete/" + id).append($('<i>').addClass('fa fa-trash')));
+    holder.append($('<button>').addClass('btn btn-outline-danger btn-sm deleteButton').attr('type', 'button').attr('data-url', url_prefix + "destroy/" + id).attr('data-text', 'Biztosan törlöd ' + name + " névjegyét?").append($('<i>').addClass('fa fa-trash')));
     return this.column(holder, null, "text-right");
 };
 

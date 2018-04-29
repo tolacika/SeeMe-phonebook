@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller {
     public function index() {
-        return view('contact.list   ');
+        return view('contact.list');
     }
 
     public function listAjax() {
@@ -52,7 +52,7 @@ class ContactController extends Controller {
         /** @var Contact $c */
         foreach ($contacts as $c) {
             $categories = [];
-            foreach ($c->categories as $cat){
+            foreach ($c->categories as $cat) {
                 $categories[] = $cat->name;
             }
             $item = [
@@ -71,21 +71,51 @@ class ContactController extends Controller {
         return new JsonResponse($response);
     }
 
-
     public function create() {
         return view('contact.create');
     }
 
-    public function save() {
+    public function store() {
         $newContact = $this->validate(request(), [
-            'name'        => 'required',
-            'email' => 'required|email',
-            'phone'  => ['nullable', 'regex:/^36(20|30|31|70)[0-9]{7}/'],
-            'categories' => 'required|array'
+            'name'       => 'required',
+            'email'      => 'required|email',
+            'phone'      => ['nullable', 'regex:/^36(20|30|31|70)[0-9]{7}/'],
+            'categories' => 'required|array',
         ]);
 
         $contact = Contact::create(collect($newContact)->except('categories')->toArray());
         $contact->categories()->sync($newContact['categories']);
+
+        return redirect(route('contact'));
+    }
+
+    public function edit(Contact $contact) {
+        return view('contact.edit', ['contact' => $contact, 'categoryArray' => $contact->getCategoriesArray()]);
+    }
+
+    public function update(Contact $contact) {
+        $newContact = $this->validate(request(), [
+            'name'       => 'required',
+            'email'      => 'required|email',
+            'phone'      => ['nullable', 'regex:/^36(20|30|31|70)[0-9]{7}/'],
+            'categories' => 'required|array',
+        ]);
+
+        $contact->fill(collect($newContact)->except('categories')->toArray());
+        $contact->categories()->sync($newContact['categories']);
+        $contact->save();
+
+        return redirect(route('contact'));
+    }
+
+    /**
+     * @param Contact $contact
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function destroy(Contact $contact) {
+        $contact->delete();
 
         return redirect(route('contact'));
     }

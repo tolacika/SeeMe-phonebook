@@ -47,3 +47,13 @@ body {
   margin-top: 56px;
 }
 
+.modal.modal-danger .modal-header {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.modal.modal-danger .modal-header .close {
+  color: #fff;
+}
+

@@ -1,5 +1,6 @@
 @extends('layout.default')
-
+<?php /** @var \App\Models\Contact $contact */ ?>
+<?php /** @var array categoryArray */ ?>
 @section('content')
     <div class="row pt-4">
         <div class="col-sm-8 mx-auto">
@@ -15,20 +16,20 @@
                             @endforeach
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('contact.store') }}" id="createContactForm">
+                    <form method="POST" action="{{ route('contact.update', ['contact' =>$contact]) }}" id="createContactForm">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="nameField">Név</label>
-                            <input type="text" name="name" id="nameField" class="form-control" required value="{{ old('name') }}">
+                            <input type="text" name="name" id="nameField" class="form-control" required value="{{ old('name') ?? $contact->name }}">
                         </div>
                         <div class="form-group">
                             <label for="emailField">E-mail cím</label>
-                            <input type="email" name="email" id="emailField" class="form-control" required value="{{ old('email') }}">
+                            <input type="email" name="email" id="emailField" class="form-control" required value="{{ old('email') ?? $contact->email }}">
                         </div>
                         <div class="form-group">
                             <label for="phoneField">Telefonszám</label>
                             <input type="text" name="phone" id="phoneField" class="form-control" pattern="^36(20|30|31|70)[0-9]{7}"
-                                   title="Elfogatott formátum: 36xx1234567, ahol az XX lehet 20, 30, 31 vagy 70" value="{{ old('phone') }}">
+                                   title="Elfogatott formátum: 36xx1234567, ahol az XX lehet 20, 30, 31 vagy 70" value="{{ old('phone') ?? $contact->phone }}">
                         </div>
                         <div class="form-group">
                             <label>Kategória</label>
@@ -36,7 +37,7 @@
                                 <div class="form-check">
 
                                     <input class="form-check-input categorySelect" id="categorySelect{{ $cat->id }}" type="checkbox" name="categories[]"
-                                           value="{{ $cat->id }}" {{ in_array($cat->id, old('categories') !== null ? old('categories') : []) ? "checked" : "" }}>
+                                           value="{{ $cat->id }}" {{ in_array($cat->id, old('categories') !== null ? old('categories') : $categoryArray) ? "checked" : "" }}>
 
                                     <label class="form-check-label" for="categorySelect{{ $cat->id }}">{{ $cat->name }}</label>
                                 </div>

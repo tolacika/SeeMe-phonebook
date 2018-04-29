@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 
 /**
@@ -16,6 +17,9 @@ use Illuminate\Database\Query\Builder;
  * @property \Carbon\Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Contact onlyTrashed()
+ * @method static bool|null restore()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Contact whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Contact whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Contact whereEmail($value)
@@ -23,13 +27,27 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Contact whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Contact wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Contact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Contact withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Contact withoutTrashed()
  * @mixin \Eloquent
  */
 class Contact extends Model {
+
+    use SoftDeletes;
 
     protected $fillable = ['name', 'email', 'phone'];
 
     public function categories() {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function getCategoriesArray() {
+        $categories = $this->categories;
+        $arry = [];
+        foreach ($categories as $cat) {
+            $arry[] = $cat->id;
+        }
+
+        return $arry;
     }
 }

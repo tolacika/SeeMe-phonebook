@@ -20,8 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Category extends Model
-{
+class Category extends Model {
     public function contacts() {
         return $this->belongsToMany(Contact::class);
     }

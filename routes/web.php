@@ -14,6 +14,9 @@
 
 Route::get('/', 'ContactController@index')->name('home');
 Route::get('/contact', 'ContactController@index')->name('contact');
-Route::get('/contact/create', 'ContactController@create')->name('contact.create');
-Route::post('/contact/create', 'ContactController@save')->name('contact.save');
 Route::post('contact/list/ajax', 'ContactController@listAjax')->name('contact.list.ajax');
+Route::get('/contact/create', 'ContactController@create')->name('contact.create');
+Route::post('/contact/create', 'ContactController@store')->name('contact.store');
+Route::get('/contact/edit/{contact}', 'ContactController@edit')->name('contact.edit');
+Route::post('/contact/update/{contact}', 'ContactController@update')->name('contact.update');
+Route::post('/contact/destroy/{contact}', 'ContactController@destroy')->name('contact.destroy');

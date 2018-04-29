@@ -2,7 +2,21 @@ Application = function () {
 };
 
 Application.prototype.initApp = function () {
+    this.initDeletes();
     $(":input").attr('autocomplete', "off");
+};
+
+Application.prototype.initDeletes = function () {
+    $(".deleteButton").off('click.deleteButton').on('click.deleteButton', function (e) {
+        e.preventDefault();
+        var url = $(this).data('url'),
+            text = $(this).data('text');
+        $("#deleteModalForm").attr("action", url);
+        if (text) {
+            $("#deleteModalText").html(text);
+        }
+        $("#deleteModal").modal();
+    });
 };
 
 Application.prototype.post = function (settings, method) {

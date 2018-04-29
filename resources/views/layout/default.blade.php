@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="shortcut icon" href="{{ asset('img/seeme.ico') }}"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}">
     <link rel="stylesheet" href="{{ asset("css/toastr.min.css") }}">
@@ -25,6 +25,8 @@
 <div class="container">
     @yield('content')
 </div>
+
+@include('modals.commonDelete')
 
 <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>

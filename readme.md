@@ -11,6 +11,10 @@ A projekt egy beugró próbafeladat a Dream Interactive részére.
 - Telefonkönyv listázó valamint design finomítgatás (~3 óra)
 - Új kontakt (~1 óra)
 
+**2018-04-29**
+
+- Kontakt szerkesztése, törlése (~1 óra)
+
 ## Harmadik féltől származó és saját komponensek
 
 ### [Laravel 5.6](https://laravel.com/)
